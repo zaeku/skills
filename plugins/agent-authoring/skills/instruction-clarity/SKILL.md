@@ -1,5 +1,5 @@
 ---
-name: agent-instruction-clarity
+name: instruction-clarity
 description: Apply ASD-STE100 Simplified Technical English rules to writing or reviewing instructions that an AI agent will read — SKILL.md and other skill files, system prompts, AGENTS.md, CLAUDE.md, GEMINI.md and other agent instruction files, tool and subagent descriptions, task briefs, and workflow docs. Use this whenever the user is drafting, editing, or auditing text meant to be followed by a model rather than a person, even if they don't mention STE, controlled language, or clarity by name. Use it again as a revision pass after any edit to one of those files, including an edit made inside a task about something else — the topic of the task does not change what the file is. Also use it when the user says an agent "ignored", "misread", "skipped", or "half-followed" an instruction — those are usually ambiguity defects this skill diagnoses.
 ---
 

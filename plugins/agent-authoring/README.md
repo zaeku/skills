@@ -1,6 +1,14 @@
-# Agent Instruction Clarity
+# agent-authoring
 
-A revision pass for text an agent will read.
+The `instruction-clarity` skill: a revision pass for text an agent will read.
+
+```
+/plugin marketplace add zaeku/skills
+/plugin install agent-authoring@zaeku
+```
+
+Without a plugin loader, copy `skills/instruction-clarity/` into wherever your
+agent scans for skills.
 
 ASD-STE100 is a controlled-language standard written so that non-native aircraft
 mechanics cannot misread a maintenance procedure. Its failure model overlaps an

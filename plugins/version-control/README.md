@@ -16,7 +16,7 @@ A skill about a tool's failure modes goes stale when the tool changes. The versi
 
 ```
 /plugin marketplace add zaeku/skills
-/plugin install use-jujutsu-safely@zaeku
+/plugin install version-control@zaeku
 ```
 
 Without a plugin loader, copy `skills/use-jujutsu-safely/` into wherever your

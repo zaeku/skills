@@ -8,20 +8,30 @@
   },
   "plugins": [
     {
-      "name": "use-jujutsu-safely",
+      "name": "version-control",
       "description": "Work inside a Jujutsu repository without losing anyone's files. Covers inspection, changes, history edits, conflicts, recovery, bookmarks and Git remotes. Verified against jj 0.44.0.",
-      "source": "./plugins/use-jujutsu-safely",
+      "source": "./plugins/version-control",
       "category": "development",
-      "keywords": ["jujutsu", "jj", "version-control", "git"],
-      "homepage": "https://github.com/zaeku/skills/tree/main/plugins/use-jujutsu-safely"
+      "keywords": [
+        "jujutsu",
+        "jj",
+        "version-control",
+        "git"
+      ],
+      "homepage": "https://github.com/zaeku/skills/tree/main/plugins/version-control"
     },
     {
-      "name": "agent-instruction-clarity",
+      "name": "agent-authoring",
       "description": "Apply eight rules adapted from ASD-STE100 to instructions an agent will read: skills, system prompts, AGENTS.md, tool descriptions. Also diagnoses an instruction an agent skipped or half-followed.",
-      "source": "./plugins/agent-instruction-clarity",
+      "source": "./plugins/agent-authoring",
       "category": "productivity",
-      "keywords": ["skills", "prompts", "documentation", "controlled-language"],
-      "homepage": "https://github.com/zaeku/skills/tree/main/plugins/agent-instruction-clarity"
+      "keywords": [
+        "skills",
+        "prompts",
+        "documentation",
+        "controlled-language"
+      ],
+      "homepage": "https://github.com/zaeku/skills/tree/main/plugins/agent-authoring"
     }
   ]
 }
