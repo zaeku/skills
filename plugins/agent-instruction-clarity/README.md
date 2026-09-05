@@ -21,3 +21,10 @@ and why.
 The scope is narrow on purpose. Instruction precedence, worked examples, and
 trigger conditions are real failure modes that STE has nothing to say about, so
 a clean pass here is not a complete review.
+
+## Trademark
+
+ASD-STE100 and Simplified Technical English are trademarks of ASD, Brussels.
+This skill is not affiliated with, endorsed by, or certified by ASD or the
+STEMG. It adapts a subset of the standard for a different reader, and it does
+not make a document STE-compliant.

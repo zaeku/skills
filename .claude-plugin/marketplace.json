@@ -17,7 +17,7 @@
     },
     {
       "name": "agent-instruction-clarity",
-      "description": "Apply eight ASD-STE100 rules to instructions an agent will read: skills, system prompts, AGENTS.md, tool descriptions. Also diagnoses an instruction an agent skipped or half-followed.",
+      "description": "Apply eight rules adapted from ASD-STE100 to instructions an agent will read: skills, system prompts, AGENTS.md, tool descriptions. Also diagnoses an instruction an agent skipped or half-followed.",
       "source": "./plugins/agent-instruction-clarity",
       "category": "productivity",
       "keywords": ["skills", "prompts", "documentation", "controlled-language"],

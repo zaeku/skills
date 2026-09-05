@@ -1,7 +1,7 @@
 {
   "name": "agent-instruction-clarity",
   "version": "0.1.0",
-  "description": "Apply eight ASD-STE100 rules to instructions an agent will read, and diagnose an instruction an agent skipped or half-followed.",
+  "description": "Apply eight rules adapted from ASD-STE100 to instructions an agent will read, and diagnose an instruction an agent skipped or half-followed.",
   "author": { "name": "zaeku", "url": "https://github.com/zaeku" },
   "repository": "https://github.com/zaeku/skills",
   "license": "MIT",
