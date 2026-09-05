@@ -63,7 +63,7 @@ Increase the log range only when the task requires it.
 | Read | Before you |
 | --- | --- |
 | [making-changes.md](references/making-changes.md) | edit files, commit, describe, split, or abandon |
-| [rewriting-history.md](references/rewriting-history.md) | run `jj squash`, `jj split`, `jj rebase`, or `jj absorb` |
+| [rewriting-history.md](references/rewriting-history.md) | run `jj squash`, `jj split`, `jj rebase`, or `jj absorb`, or rewrite history with an external Git tool such as `git filter-repo` |
 | [bookmarks-and-remotes.md](references/bookmarks-and-remotes.md) | create, move, delete, fetch, or push a bookmark |
 | [concurrent-agents.md](references/concurrent-agents.md) | create or repair a workspace, run `jj undo`, `jj op restore` or `jj op abandon`, rewrite a change another workspace has checked out, or when more than one agent shares the repository |
 | [ids-and-templates.md](references/ids-and-templates.md) | read repository state at scale, or resolve an ambiguous ID |

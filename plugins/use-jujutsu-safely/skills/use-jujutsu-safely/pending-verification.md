@@ -69,6 +69,12 @@ Do not reintroduce these:
 - **`jj --at-op <old> new`**: files survived and no divergence appeared, contradicting the
   skill's former table row. The row is gone; the behaviour is not documented anywhere.
 
+- **An external Git history rewrite in a colocated repository.** `git filter-repo` repacked away
+  the working-copy commit, and every `jj` command afterwards failed to open the repository.
+  Measured once on jj 0.44.0 with `git filter-repo` a40bce5. The recovery in
+  [rewriting-history.md](references/rewriting-history.md) is written from that one run:
+  `filter-branch` and BFG are named there by inference from the same repack, not by measurement.
+
 ## Judgment calls, deliberately settled
 
 - The six-row per-command table is replaced by one invariant plus the single row that has held

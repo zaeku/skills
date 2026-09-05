@@ -1,6 +1,6 @@
 # Rewrite history with explicit targets
 
-Read before you run `jj squash`, `jj split`, `jj rebase`, or `jj absorb`. These commands rewrite descendants and move bookmarks.
+Read before you run `jj squash`, `jj split`, `jj rebase`, or `jj absorb`. These commands rewrite descendants and move bookmarks. Read it also before you rewrite history with an external Git tool, which breaks a colocated repository unless you remove `.jj` first.
 
 ## Before the rewrite
 
@@ -33,6 +33,24 @@ that workspace's unsnapshotted files at the next `jj` command there, measured on
 Snapshot every other workspace before the rewrite; step 1 above is where you find out whether
 this applies. [concurrent-agents.md](concurrent-agents.md) has the full list of operations
 that do this, and the divergence resolution procedure.
+
+## Rewriting with an external Git tool
+
+`git filter-repo`, `git filter-branch` and BFG rewrite the Git commits, then repack the object store. The repack deletes Jujutsu's working-copy commit, because no Git ref points at it. Every later `jj` command in that repository then fails with `Object <id> of type commit not found`. `--ignore-working-copy` and `jj workspace update-stale` fail at the same point, so the repository does not open at all.
+
+Remove `.jj` before you run such a tool, and create it again afterwards:
+
+1. Create a bookmark at the commit you want rewritten. `git filter-repo` rewrites refs, and a colocated repository usually has a detached Git `HEAD` and no branch.
+2. Copy `.git` and `.jj` to a backup outside the repository.
+3. Run `rm -rf .jj`.
+4. Run the external tool.
+5. Run `jj git init --colocate` in the same directory.
+
+Step 5 gives you back a repository whose history is the rewritten one. You lose the operation log and the empty working-copy commit. You lose no project history, because the commits, their descriptions and their diffs are Git objects that the tool rewrote in place.
+
+**Do not restore the deleted working-copy commit from the backup.** Its ancestors are the commits you just rewrote, so restoring it returns the content you removed to the object store.
+
+Measured once on jj 0.44.0, with `git filter-repo` a40bce5, on 2026-09-05.
 
 ## `jj absorb`
 
