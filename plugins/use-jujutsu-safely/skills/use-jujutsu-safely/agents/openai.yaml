@@ -1,0 +1,4 @@
+interface:
+  display_name: "Use Jujutsu Safely"
+  short_description: "Safe Jujutsu workflows for agent-driven repository work"
+  default_prompt: "Use $use-jujutsu-safely to inspect this repository and complete the requested change safely."

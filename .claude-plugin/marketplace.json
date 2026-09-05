@@ -1,0 +1,27 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "zaeku",
+  "description": "Agent skills written and revised alongside the agents that read them.",
+  "owner": {
+    "name": "zaeku",
+    "url": "https://github.com/zaeku"
+  },
+  "plugins": [
+    {
+      "name": "use-jujutsu-safely",
+      "description": "Work inside a Jujutsu repository without losing anyone's files. Covers inspection, changes, history edits, conflicts, recovery, bookmarks and Git remotes. Verified against jj 0.44.0.",
+      "source": "./plugins/use-jujutsu-safely",
+      "category": "development",
+      "keywords": ["jujutsu", "jj", "version-control", "git"],
+      "homepage": "https://github.com/zaeku/skills/tree/main/plugins/use-jujutsu-safely"
+    },
+    {
+      "name": "agent-instruction-clarity",
+      "description": "Apply eight ASD-STE100 rules to instructions an agent will read: skills, system prompts, AGENTS.md, tool descriptions. Also diagnoses an instruction an agent skipped or half-followed.",
+      "source": "./plugins/agent-instruction-clarity",
+      "category": "productivity",
+      "keywords": ["skills", "prompts", "documentation", "controlled-language"],
+      "homepage": "https://github.com/zaeku/skills/tree/main/plugins/agent-instruction-clarity"
+    }
+  ]
+}

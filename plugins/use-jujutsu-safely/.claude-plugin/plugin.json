@@ -1,0 +1,9 @@
+{
+  "name": "use-jujutsu-safely",
+  "version": "0.1.0",
+  "description": "Work inside a Jujutsu repository without losing anyone's files. Verified against jj 0.44.0.",
+  "author": { "name": "zaeku", "url": "https://github.com/zaeku" },
+  "repository": "https://github.com/zaeku/skills",
+  "license": "MIT",
+  "keywords": ["jujutsu", "jj", "version-control", "git"]
+}
