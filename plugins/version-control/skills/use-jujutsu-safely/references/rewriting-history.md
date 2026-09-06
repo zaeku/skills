@@ -1,6 +1,6 @@
 # Rewrite history with explicit targets
 
-Read before you run `jj squash`, `jj split`, `jj rebase`, or `jj absorb`. These commands rewrite descendants and move bookmarks. Read it also before you rewrite history with an external Git tool, which breaks a colocated repository unless you remove `.jj` first.
+Read before you run `jj squash`, `jj split`, `jj rebase`, `jj absorb`, or `jj sign`. These commands rewrite descendants and move bookmarks. Read it also before you rewrite history with an external Git tool, which breaks a colocated repository unless you remove `.jj` first.
 
 ## Before the rewrite
 
@@ -51,6 +51,14 @@ Step 5 gives you back a repository whose history is the rewritten one. You lose 
 **Do not restore the deleted working-copy commit from the backup.** Its ancestors are the commits you just rewrote, so restoring it returns the content you removed to the object store.
 
 Measured once on jj 0.44.0, with `git filter-repo` a40bce5, on 2026-09-05.
+
+## `jj sign`
+
+**Signing rewrites what it signs.** A signature is part of the commit, so every commit signed gets a new commit ID, and the bookmarks that pointed at them move. Step 5 above applies: an ID you resolved before signing names the unsigned commit or nothing.
+
+Sign before a push and never after one. A pushed commit is immutable, and Jujutsu refuses to rewrite it.
+
+Jujutsu re-signs a commit it has already signed, because it cannot tell that a signature is yours without producing one. Signing a range of ten is ten signing operations, and a hardware key or a password manager may ask about each.
 
 ## `jj absorb`
 

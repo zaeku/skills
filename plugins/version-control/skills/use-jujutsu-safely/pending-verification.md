@@ -75,6 +75,16 @@ Do not reintroduce these:
   [rewriting-history.md](references/rewriting-history.md) is written from that one run:
   `filter-branch` and BFG are named there by inference from the same repack, not by measurement.
 
+- **Commit signing, and what it costs.** Measured once on jj 0.44.0 with 1Password's
+  op-ssh-sign: with a signing backend configured, a locked key store fails every command,
+  `jj status` included, and neither `--ignore-working-copy` nor `jj workspace update-stale`
+  gets past it. `jj sign` with no arguments took `reachable(@, mutable())` and rewrote each
+  commit it signed. GitHub's protected-branch rule rejected an unsigned push with
+  `protected branch hook declined`, verified against a throwaway branch.
+- **`jj git push` does not run Git's `pre-push` hook.** Measured once: the same hook blocked
+  `git push` and was ignored by `jj git push`. Whether any other Git hook runs under
+  Jujutsu is untested.
+
 ## Judgment calls, deliberately settled
 
 - The six-row per-command table is replaced by one invariant plus the single row that has held

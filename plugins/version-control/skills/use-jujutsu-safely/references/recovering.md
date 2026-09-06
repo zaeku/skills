@@ -22,6 +22,7 @@ If you are not certain which operation or revision is the correct recovery targe
 - The latest operation must be reversed: Inspect the latest operation before you use `jj undo`. If any other workspace exists, run `jj util snapshot` in each one first. `jj undo` is an operation-log rewrite.
 - The repository must return to an earlier operation: Identify the exact operation before you use `jj op restore`. If any other workspace exists, run `jj util snapshot` in each one first. This is the one case where you snapshot a workspace you do not own — see [concurrent-agents.md](concurrent-agents.md).
 - A commit is no longer visible in `jj log`: Reference it by ID. `jj file show -r <commit-id> <path>` and `jj diff -r <commit-id>` read an abandoned commit, and `jj workspace add <destination> -r <commit-id>` checks one out whole.
+- Every command fails with a signing error, including commands that only read: signing is not limited to the commits you make. Every command snapshots the working copy, a snapshot writes a commit, and a configured backend signs it. `--ignore-working-copy` does not help, because the failure is in writing rather than in reading. Make the backend answer — unlock the key store it uses — or set `signing.behavior = "keep"` to stop signing. Neither is a repair: nothing was damaged.
 - The content was in the working copy at a known moment: Read the repository as of that operation. `jj --at-op <op-id> log -r @` gives the commit that held it, and `jj --at-op <op-id> file show -r <commit> <path>` reads the file.
 
 ## Content is rarely lost

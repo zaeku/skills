@@ -25,7 +25,7 @@ Apply these cases:
 
 These have no natural trigger point, because they apply to every action. The rest of this skill assumes them.
 
-**1. There is no staging area, and every `jj` command snapshots first.** `@` is the working-copy commit and every file edit is already part of it. A generated file or a build output enters `@` as soon as it exists. A command you think of as read-only — `jj status`, `jj log` — snapshots the working copy before it runs. A file above the snapshot size limit is the one thing that does not enter `@`: Jujutsu refuses that file alone, exits 0, leaves it untracked, and records every other file normally. Add its pattern to `.gitignore`.
+**1. There is no staging area, and every `jj` command snapshots first.** `@` is the working-copy commit and every file edit is already part of it. A generated file or a build output enters `@` as soon as it exists. A command you think of as read-only — `jj status`, `jj log` — snapshots the working copy before it runs. A snapshot writes a commit, so a repository with commit signing configured signs on every command. A file above the snapshot size limit is the one thing that does not enter `@`: Jujutsu refuses that file alone, exits 0, leaves it untracked, and records every other file normally. Add its pattern to `.gitignore`.
 
 **The exception to rule 1: in a workspace that is not yours, the next `jj` command can delete files instead of snapshotting them.** That happens after any other workspace rewrote the operation log — `jj undo`, `jj op restore`, `jj op abandon` — or rewrote the change this workspace has checked out — `jj rebase -r`, `jj abandon`. The command removes at least every file Jujutsu never snapshotted there, and can remove a snapshotted one too. Run `jj util snapshot` in every other workspace **before** you run such a command. After the command the files are already off that disk, and `jj util snapshot` cannot bring them back. See [concurrent-agents.md](references/concurrent-agents.md).
 
@@ -63,7 +63,7 @@ Increase the log range only when the task requires it.
 | Read | Before you |
 | --- | --- |
 | [making-changes.md](references/making-changes.md) | edit files, commit, describe, split, or abandon |
-| [rewriting-history.md](references/rewriting-history.md) | run `jj squash`, `jj split`, `jj rebase`, or `jj absorb`, or rewrite history with an external Git tool such as `git filter-repo` |
+| [rewriting-history.md](references/rewriting-history.md) | run `jj squash`, `jj split`, `jj rebase`, `jj absorb`, or `jj sign`, or rewrite history with an external Git tool such as `git filter-repo` |
 | [bookmarks-and-remotes.md](references/bookmarks-and-remotes.md) | create, move, delete, fetch, or push a bookmark |
 | [concurrent-agents.md](references/concurrent-agents.md) | create or repair a workspace, run `jj undo`, `jj op restore` or `jj op abandon`, rewrite a change another workspace has checked out, or when more than one agent shares the repository |
 | [ids-and-templates.md](references/ids-and-templates.md) | read repository state at scale, or resolve an ambiguous ID |
