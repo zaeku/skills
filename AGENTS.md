@@ -27,9 +27,9 @@ or run `jj help <command>`. The rules that cost something here:
   changes.
 - **Sign before you push.** GitHub rejects an unsigned push to `main`.
 
-  1. Run `jj sign`. With no arguments it takes `reachable(@-, mutable())`, and
-     that revset reaches in both directions, so it includes `@` as a descendant
-     of `@-`.
+  1. Run `jj sign`. It takes the `revsets.sign` revset, set here to
+     `reachable(@-, mutable())`. That revset reaches in both directions, so it
+     includes `@` as a descendant of `@-` whenever anything is signed at all.
   2. Run `jj unsign -r @`. Add `--ignore-working-copy` when the repository will
      no longer open; that flag skips the snapshot and not the revset, so it
      prevents nothing else here.
