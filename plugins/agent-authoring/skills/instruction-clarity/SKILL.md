@@ -1,17 +1,17 @@
 ---
 name: instruction-clarity
-description: Rules for writing or reviewing instructions that an AI agent will read — SKILL.md and other skill files, system prompts, AGENTS.md, CLAUDE.md, GEMINI.md and other agent instruction files, tool and subagent descriptions, task briefs, and workflow docs. Use this whenever the user is drafting, editing, or auditing text meant to be followed by a model rather than a person, even if they don't mention STE, controlled language, or clarity by name. Use it again as a revision pass after any edit to one of those files, including an edit made inside a task about something else — the topic of the task does not change what the file is. Also use it when the user says an agent "ignored", "misread", "skipped", or "half-followed" an instruction, or did the thing the file argued against — this skill diagnoses each of those from the instruction text.
+description: Rules for writing or reviewing instructions that a model will read — SKILL.md and other skill files, system prompts, AGENTS.md, CLAUDE.md, GEMINI.md and other agent instruction files, tool and subagent descriptions, task briefs, and workflow docs. Use this whenever the user is drafting, editing, or auditing text meant to be followed by a model rather than a person, even if they don't mention STE, controlled language, or clarity by name. Use it again as a revision pass after any edit to one of those files, including an edit made inside a task about something else — the topic of the task does not change what the file is. Also use it when the user says a model "ignored", "misread", "skipped", or "half-followed" an instruction, or did the thing the file argued against — this skill diagnoses each of those from the instruction text.
 ---
 
 # Agent Instruction Clarity
 
 ASD-STE100 is a controlled-language standard written so that non-native aircraft
 mechanics cannot misread a maintenance procedure. Its failure model overlaps
-heavily with an LLM's: ambiguous parse trees, unresolved referents, and
-instructions that get partially executed.
+heavily with the way a model misreads text: ambiguous parse trees, unresolved
+referents, and instructions that get partially executed.
 
-Eight of its rules transfer directly. Rule 9 is an addition to the standard.
-The rules are listed below in the order that finds the most defects per pass.
+Eight of its rules transfer directly. The rules are listed below in the order
+that finds the most defects per pass.
 
 ## The nine rules
 
@@ -21,30 +21,30 @@ The rules are listed below in the order that finds the most defects per pass.
 | 2 | One instruction per sentence, imperative | Compound sentences get partially executed, and the omission is hard to spot afterward | `and` / `then` / `;` between two verbs in a procedural sentence |
 | 3 | Constraints before the step, with the consequence stated | A late constraint is read after the model has started acting. A stated reason lets the model apply the rule to cases the author did not anticipate | Caveats or "note that" after the step; prohibitions with no consequence |
 | 4 | Conditional logic as a vertical list | Nested prose conditions force a truth table into working memory, and branches get dropped | Two or more of `if` / `unless` / `except` / `otherwise` in one sentence |
-| 5 | Name the actor | An agentless action becomes a guess: do I do this, or is it already done, or does the user? | `is/are/was/were` + participle with no `by <actor>` |
+| 5 | Name the actor | An action with no actor becomes a guess: do I do this, or is it already done, or does the user? | `is/are/was/were` + participle with no `by <actor>` |
 | 6 | Noun clusters of three words maximum | Stacked nouns have several valid parses and English gives no signal which is meant | Four or more stacked nouns with no preposition between them |
 | 7 | No telegraphic compression | Stripping articles and prepositions to save tokens removes exactly the cues that fix structure | Missing articles, dropped prepositions, dashes standing in for verbs |
 | 8 | Long sentences are a smell, not a limit | A long sentence has usually accumulated a second instruction or a hidden condition | Sentences past ~20 words in procedures, ~25 in prose |
-| 9 | Instructions in the file, reasons outside it | A defended choice describes the draft rather than the current state, and the rejected alternative stays in context as a description of the wrong behavior | `not X but Y`, "the reason", "this is intentional", any clause that defends a choice or explains an absence |
+| 9 | Instructions in the file, reasons outside it | A defended choice describes the draft, not the current state, and the rejected alternative stays in context as text | `not X but Y`, "the reason", "this is intentional", any clause that defends a choice or explains an absence |
 
 Rules 1, 2, and 3 account for most real defects. If a pass has to be short, do
 those three.
 
-Read `[rules.md](references/rules.md)` for the full treatment of each rule with worked
-before/after examples. Read it whenever you are rewriting rather than only
-flagging, or whenever a detection signal fires and the fix is not obvious.
+`[rules.md](references/rules.md)` carries the full treatment of each rule with worked
+before/after examples. Read it in either of these cases:
+
+- You are rewriting rather than only flagging.
+- A scan signal fired and the fix is not obvious.
 
 ## Writing
 
-Draft normally first, then run the rules as a revision pass. Applying them while
+Draft normally first. Then run the rules as a revision pass. Applying them while
 drafting produces stilted text and slows the draft down.
 
 ### Schedule the revision pass
 
-A draft written inside another task carries no cue to come back to it. The task
-was about a repository, a bug, or a tool, so nothing in it says "you just wrote
-an instruction". Name the moment instead. Run the pass at whichever of these
-arrives first:
+A draft written inside another task carries no cue to come back to it. Name the
+moment instead. Run the pass at whichever of these arrives first:
 
 - You are about to report the edit as finished.
 - You are about to commit the file, or to push it.
@@ -66,12 +66,11 @@ Apply these cases:
 Scan and report in different orders. They serve different people.
 
 **Scan by rule.** Go rule by rule through the whole document rather than reading
-it once for general quality. The scan column above is meant to be applied
-mechanically, and one rule at a time is what makes that possible.
+it once for general quality. Apply the scan signal mechanically, one rule at a
+time.
 
 **Report by document position.** Someone fixing the document works top to
-bottom, so findings scattered by rule number force them to jump around. Sort the
-findings by location before you present them.
+bottom. Sort the findings by location before you present them.
 
 Report each finding as three things:
 
@@ -88,7 +87,7 @@ occurrence.
 
 ## Diagnosing from a symptom
 
-Users often arrive with a behavior complaint and no document in hand — an agent
+Users often arrive with a behavior complaint and no document in hand — a model
 skipped a step, ignored a constraint, or handled one case wrongly. Ask for the
 instruction text, then start from the rule the symptom points at.
 
@@ -108,10 +107,10 @@ then outside this skill's scope — see the Scope section.
 
 ## Scope
 
-This skill covers the clarity defects in the table above. Agent
-instructions have other failure modes — instruction precedence, worked examples,
-trigger conditions, positive alternatives to bare prohibitions — that these
-nine rules do not cover. Do not treat a clean pass here as a complete review.
+This skill covers the clarity defects in the table above. Agent instructions
+have other failure modes — instruction precedence, worked examples, trigger
+conditions, positive alternatives to bare prohibitions — that these nine rules
+do not cover. Do not treat a clean pass here as a complete review.
 
 `[design-notes.md](references/design-notes.md)` records what was left out of the standard, and
 where the skill goes past it. Read it before extending or editing this skill.

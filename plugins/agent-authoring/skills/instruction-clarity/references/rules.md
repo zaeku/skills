@@ -44,7 +44,8 @@ referring to one specific part of the procedure.
 ## 3 — Constraints before the step, with the consequence attached
 
 STE requires warnings and cautions to appear ahead of the procedure they govern,
-in the imperative, and to state what happens if ignored. All three parts matter.
+in the imperative, and to state what happens if a reader ignores them. All three
+parts matter.
 
 A constraint placed after the step is read after the model has already started
 acting on it. And a bare prohibition is weaker than one with a stated reason — a
@@ -86,7 +87,6 @@ Check the file before you parse it:
 ```
 
 Writing the cases out often reveals a branch the prose version never specified.
-That is the main reason to do it.
 
 ## 5 — Name the actor
 
@@ -95,13 +95,12 @@ becomes a decision the model has to guess at.
 
 **Instead of:** "The configuration is validated before deployment."
 
-**Write:** "Validate the configuration before you deploy." (agent acts)
+**Write:** "Validate the configuration before you deploy." (the model acts)
 
-**Or:** "The user validates the configuration before you deploy." (user acts)
+**Or:** "The user validates the configuration before you deploy." (the user acts)
 
-The point is not a stylistic preference for the active voice. Every action needs
-a named actor. Keep the passive where the actor is stated and the sentence reads
-better that way.
+Every action needs a named actor. Keep the passive where the actor is stated and
+the sentence reads better that way.
 
 ## 6 — Limit noun clusters to three words
 
@@ -111,8 +110,6 @@ which one is meant. Insert prepositions to fix the structure.
 **Instead of:** "agent skill instruction file format validation"
 
 **Write:** "validation of the file format for agent skill instructions"
-
-This costs tokens and is worth it.
 
 ## 7 — Do not compress by deleting structure
 
@@ -154,9 +151,8 @@ Three forms of a reason appear most often:
 
 **Write:** "Use `rg`. Its output is stable across machines, and `grep -r` output is not."
 
-**Method:** delete the sentence and read the document again. If no agent
-behavior changes, the sentence was a reason. Restore it in the commit message
-instead.
+**Method:** delete the sentence. Read the document again. If no model behavior
+changes, the sentence was a reason. Restore it in the commit message instead.
 
 Three things survive this test and stay in the file:
 
