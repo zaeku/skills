@@ -18,7 +18,7 @@ This file holds what applies before you know which task you are in. Everything e
 Apply these cases:
 
 - `.jj` exists and `.git` does not: Use `jj` to inspect and change repository state.
-- `.jj` does not exist: Do not initialize Jujutsu unless the user requests initialization.
+- `.jj` does not exist: Initialize Jujutsu when the user asks for it. Do not initialize it otherwise.
 - `.jj` and `.git` exist: Treat the repository as colocated. Use `jj` for commits and history edits.
 
 ## Four rules that hold whatever you are doing
