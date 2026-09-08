@@ -25,7 +25,7 @@ that finds the most defects per pass.
 | 6 | Noun clusters of three words maximum | Stacked nouns have several valid parses and English gives no signal which is meant | Four or more stacked nouns with no preposition between them |
 | 7 | No telegraphic compression | Stripping articles and prepositions to save tokens removes exactly the cues that fix structure | Missing articles, dropped prepositions, dashes standing in for verbs |
 | 8 | Long sentences are a smell, not a limit | A long sentence has usually accumulated a second instruction or a hidden condition | Sentences past ~20 words in procedures, ~25 in prose |
-| 9 | Instructions in the file, reasons outside it | A defended choice describes the draft, not the current state, and the rejected alternative stays in context as text | `not X but Y`, "the reason", "this is intentional", any clause that defends a choice or explains an absence |
+| 9 | Instructions in the file, reasons outside it | A defended choice describes the draft, not the current state, and an alternative the reader never considered stays in context as text | "this is intentional", "the reason", a clause that defends how the file is written, a negation of an alternative nothing points the reader at, an absence explained in the document rather than in the world. Never the consequence of ignoring the instruction, which rule 3 requires |
 
 Rules 1, 2, and 3 account for most real defects. If a pass has to be short, do
 those three.

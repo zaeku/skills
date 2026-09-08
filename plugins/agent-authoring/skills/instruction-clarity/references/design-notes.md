@@ -44,6 +44,21 @@ prior knowledge" — was rejected as the test. It deletes worked examples and th
 consequence that rule 3 requires, and it invites an argument about whether a
 defense informs. The deletion test asks about behavior instead.
 
+First use on a real `CLAUDE.md` changed the signal twice.
+
+The signal led with `not X but Y`. It fired three times in that file and was
+wrong three times: `rg`, not `grep -r`, and two more of the same shape. Each
+negation named a habit the reader arrives with, which makes the rejected term
+the working part of the instruction. The form cannot separate that from a
+defense, so the signal now names what the clause describes instead of how it is
+punctuated.
+
+The signal also read "any clause that defends a choice or explains an absence",
+which caught the consequence that rule 3 requires. Two rules in one table
+pointed opposite ways. Rule 9 now carries the exclusion, and an absence counts
+only when the document is what lacks the thing. An absence in the world — no
+`timeout` binary on this machine — is a fact the model acts on.
+
 ## Not covered: agent-specific failure modes
 
 Several properties that matter a great deal in agent instructions have no STE

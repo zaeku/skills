@@ -141,21 +141,40 @@ An instruction file states what is true now. The reason for a rule belongs
 wherever the change is discussed: a reply to the user, a commit message, a
 design note.
 
-Three forms of a reason appear most often:
+### The line between this rule and rule 3
 
-- A clause that negates an alternative: "not X, but Y".
-- A clause that defends the choice: "this is intentional", "for consistency".
-- A clause that explains an absence: "there is no cache here because".
+Rule 3 requires a reason of one kind, and this rule cuts another kind. Ask what
+the clause describes:
+
+- The world the model acts in — what happens when the instruction is ignored, what the machine does, what the reader will otherwise reach for. Keep it, and rule 3 asks for it where it is missing.
+- The author's deliberation — the alternative rejected in the draft, the objection already answered, the choice defended. Cut it.
+
+A negation does not decide this by itself. "Use `rg`, not `grep -r`" overrides a
+habit the reader arrives with, so the rejected term is the working part of the
+instruction. "Use `rg`. This is not a performance preference." answers an
+objection nobody raised.
+
+The same holds for an absence. "There is no plain `timeout` on this machine, and
+a script that assumes one dies with exit 127" states a fact about the machine
+and its consequence. "There is no retry helper here, because adding one felt
+premature" states the draft.
+
+### Three forms to cut
+
+- A negation whose alternative only the author considered: "not X, but Y", where nothing would have pointed the reader at X.
+- A clause that defends how the file is written: "this is intentional", "for consistency", "for brevity".
+- An absence explained in the document rather than in the world: "there is no example here because".
 
 **Instead of:** "Use `rg`. This is not a performance preference — `grep -r` is fast enough — but a consistency one."
 
-**Write:** "Use `rg`. Its output is stable across machines, and `grep -r` output is not."
+**Write:** "Use `rg`, not `grep -r`. Its output is stable across machines."
 
 **Method:** delete the sentence. Read the document again. If no model behavior
 changes, the sentence was a reason. Restore it in the commit message instead.
 
-Three things survive this test and stay in the file:
+Four things survive this test and stay in the file:
 
 - The consequence that rule 3 requires. A model that knows what a rule prevents applies it to new cases.
+- A negation that overrides a habit the reader arrives with.
 - A worked example. The example is the instruction.
 - A constraint restated at the end of a long document.
