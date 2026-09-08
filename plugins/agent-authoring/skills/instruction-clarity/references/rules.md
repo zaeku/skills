@@ -162,7 +162,7 @@ premature" states the draft.
 ### Three forms to cut
 
 - A negation whose alternative only the author considered: "not X, but Y", where nothing would have pointed the reader at X.
-- A clause that defends how the file is written: "this is intentional", "for consistency", "for brevity".
+- A clause that defends a choice the document records: "this is intentional", "for consistency", "the reason for two passes is".
 - An absence explained in the document rather than in the world: "there is no example here because".
 
 **Instead of:** "Use `rg`. This is not a performance preference — `grep -r` is fast enough — but a consistency one."

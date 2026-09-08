@@ -59,6 +59,15 @@ pointed opposite ways. Rule 9 now carries the exclusion, and an absence counts
 only when the document is what lacks the thing. An absence in the world — no
 `timeout` binary on this machine — is a fact the model acts on.
 
+A second report on the same pass moved the exclusion into the why column. Every
+item in the scan column now names the target of the clause, so a consequence
+matches none of them, and the column stays mechanical. The same report caught
+the scan column running narrower than the why column: it said "defends how the
+file is written" while the why column said "a defended choice", and the file
+under review defended a tool choice. A bare "the reason" went out with it,
+because the phrase appears in any sentence that talks about reasons, including
+the rule that governs them.
+
 ## Not covered: agent-specific failure modes
 
 Several properties that matter a great deal in agent instructions have no STE
