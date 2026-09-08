@@ -1,6 +1,6 @@
 # Change IDs and log templates
 
-Use this reference to read repository state with less output. Verified against jj 0.44.0.
+Use this reference to read repository state with less output. Verified against jj 0.45.1.
 
 ## Shortest unique prefix
 
