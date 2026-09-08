@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "version-control",
-      "description": "Work inside a Jujutsu repository without losing anyone's files. Covers inspection, changes, history edits, conflicts, recovery, bookmarks and Git remotes. Verified against jj 0.44.0.",
+      "description": "Work inside a Jujutsu repository without losing anyone's files. Covers inspection, changes, history edits, conflicts, recovery, bookmarks and Git remotes. Verified against jj 0.45.1.",
       "source": "./plugins/version-control",
       "category": "development",
       "keywords": [
