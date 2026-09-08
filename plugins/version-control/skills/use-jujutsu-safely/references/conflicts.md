@@ -21,9 +21,9 @@ commit happens to be an ancestor of `@`, `jj status` does print the conflict and
 
 If the user selected a merge tool, run `jj resolve <path>` with that tool and skip the cases below. Otherwise apply these cases to each file:
 
-- One complete side is correct, and you have evidence for it: Confirm which side is which with `jj diff -r <commit>` first. Then run `jj resolve --tool :ours` or `jj resolve --tool :theirs`. `:ours` is side #1 of the conflict and `:theirs` is side #2. In a rebase, `:ours` is the destination's content and `:theirs` is the rebased commit's content. Neither one means "the branch you are on".
+- One complete side is correct, and you have evidence for it: Confirm which side is which first. `jj file show -r <commit> <path>` prints the materialized conflict, and its header names each side and the role it played — `(rebase destination)`, `(rebased revision)`. Then run `jj resolve --tool :ours` or `jj resolve --tool :theirs`. `:ours` is side #1 of the conflict and `:theirs` is side #2. In a rebase, `:ours` is the destination's content and `:theirs` is the rebased commit's content. Neither one means "the branch you are on".
 - Neither side is correct on its own: Edit the conflict markers in the working copy directly. The next Jujutsu command snapshots the file. The conflict clears when the markers are gone.
 
 Do not select `:ours` or `:theirs` without evidence. A side selector discards the whole other side, including valid modifications.
 
-Do not assume that a conflicted commit can be pushed to a Git remote. A Git remote cannot represent every Jujutsu conflict state. Resolve conflicts before `jj git push`. `jj git push --allow-conflicts` exists; use it only when the user asked for a conflicted commit on the remote.
+Do not assume that a conflicted commit can be pushed to a Git remote. A Git remote cannot represent every Jujutsu conflict state. Resolve conflicts before `jj git push`. A push of one refuses with `Error: Won't push commit <id> since it has conflicts`. `jj git push --allow-conflicts` overrides that; use it only when the user asked for a conflicted commit on the remote.

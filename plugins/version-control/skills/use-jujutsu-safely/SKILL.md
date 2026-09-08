@@ -21,18 +21,23 @@ Apply these cases:
 - `.jj` does not exist: Initialize Jujutsu when the user asks for it. Do not initialize it otherwise.
 - `.jj` and `.git` exist: Treat the repository as colocated. Use `jj` for commits and history edits.
 
+**Settings change what a command does.** This skill states Jujutsu's built-in defaults. A user config, a repository config or a `--config` flag can replace any of them: which revisions a command takes when you name none, which commits are immutable, whether a bookmark advances. When a default this skill names decides the outcome, read the value this repository uses first:
+
+```sh
+jj config list --include-defaults <name>
+```
+
 ## Four rules that hold whatever you are doing
 
 The rest of this skill assumes them.
 
 **1. There is no staging area, and every `jj` command snapshots first.** `@` is the working-copy commit and every file edit is already part of it. A generated file or a build output enters `@` as soon as it exists. A command you think of as read-only — `jj status`, `jj log` — snapshots the working copy before it runs. A snapshot writes a commit, so a repository with commit signing configured signs on every command. A file above the snapshot size limit is the one thing that does not enter `@`. Jujutsu refuses that file alone: it exits 0, leaves the file untracked, and records every other file normally. Add its pattern to `.gitignore`.
 
-**The exception to rule 1: in a workspace that is not yours, the next `jj` command can delete files instead of snapshotting them.** That happens after either of these:
+**The exception to rule 1: a workspace that is not yours loses files instead of snapshotting them.** That starts when another workspace rewrites the change this one has checked out — `jj rebase -r`, `jj abandon -r`. This workspace's working copy is then stale, and `jj workspace update-stale` removes the files it cannot account for: at least every file Jujutsu never snapshotted there, and snapshotted ones too.
 
-- Another workspace rewrote the operation log: `jj undo`, `jj op restore`, `jj op abandon`.
-- Another workspace rewrote the change this workspace has checked out: `jj rebase -r`, `jj abandon`.
+`snapshot.auto-update-stale` decides who runs that command. The default is `false`, so the workspace refuses every `jj` command with `Error: The working copy is stale` until someone clears it by hand. Set to `true`, the next `jj` command clears it and exits 0.
 
-The command removes at least every file Jujutsu never snapshotted there, and can remove a snapshotted one too. Run `jj util snapshot` in every other workspace **before** you run such a command. After the command the files are already off that disk, and `jj util snapshot` cannot bring them back. See [concurrent-agents.md](references/concurrent-agents.md).
+Run `jj util snapshot` in every other workspace **before** you rewrite anything. Afterwards is too late: a stale workspace refuses `jj util snapshot` as well. See [concurrent-agents.md](references/concurrent-agents.md).
 
 **2. Name revisions by ID. Never by position.** Each of these names whatever sits there at that instant: `heads(...)`, `@-`, "the tip", and any shell substitution that resolves one of them. A rebase, another workspace or a snapshot changes what they resolve to. The next command then acts on a different commit, and it reports nothing.
 
@@ -70,7 +75,7 @@ Increase the log range only when the task requires it.
 | [making-changes.md](references/making-changes.md) | edit files, commit, describe, split, or abandon |
 | [rewriting-history.md](references/rewriting-history.md) | run `jj squash`, `jj split`, `jj rebase`, `jj absorb`, or `jj sign`, or rewrite history with an external Git tool such as `git filter-repo` |
 | [bookmarks-and-remotes.md](references/bookmarks-and-remotes.md) | create, move, delete, fetch, or push a bookmark |
-| [concurrent-agents.md](references/concurrent-agents.md) | create or repair a workspace, run `jj undo`, `jj op restore` or `jj op abandon`, rewrite a change another workspace has checked out, or when more than one agent shares the repository |
+| [concurrent-agents.md](references/concurrent-agents.md) | create or repair a workspace, run `jj undo`, `jj op restore` or `jj op abandon`, rewrite a change another workspace has checked out, act on a divergent change, or when more than one agent shares the repository |
 | [ids-and-templates.md](references/ids-and-templates.md) | read repository state at scale, or resolve an ambiguous ID |
 | [conflicts.md](references/conflicts.md) | act on a conflict Jujutsu reports |
 | [recovering.md](references/recovering.md) | act after a command produced a result you did not expect, or when content appears to be missing |

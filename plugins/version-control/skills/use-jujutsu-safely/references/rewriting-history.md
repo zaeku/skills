@@ -4,7 +4,7 @@ Read before you run `jj squash`, `jj split`, `jj rebase`, `jj absorb`, or `jj si
 
 ## Before the rewrite
 
-1. Run `jj workspace list`. A rewrite of a change another workspace has checked out removes that workspace's unsnapshotted files, so when any other workspace exists:
+1. Run `jj workspace list`. A rewrite of a change another workspace has checked out makes its working copy stale, and clearing that state removes its files, so when any other workspace exists:
    - Read [concurrent-agents.md](concurrent-agents.md) before you continue.
    - Run `cd <workspace> && jj util snapshot` in each of those workspaces.
 2. Run `jj status`.
@@ -30,10 +30,11 @@ Step 5 is the one that gets skipped. An ID resolved before a rebase and reused a
 ## Rewriting while workspaces exist
 
 A rebase or an `abandon` of a change that another workspace has checked out does two things.
-It usually leaves the change divergent — two commits sharing one change ID. It also removes
-that workspace's unsnapshotted files at the next `jj` command there, measured on jj 0.44.0.
-Snapshot every other workspace before the rewrite; step 1 above is where you find out whether
-this applies. [concurrent-agents.md](concurrent-agents.md) has the full list of operations
+It usually leaves the change divergent — two commits sharing one change ID. It also makes that
+workspace's working copy stale, and clearing that state removes the workspace's files, measured on
+jj 0.45.1. Whether the workspace stops with `Error: The working copy is stale` first, or clears it
+silently at the next `jj` command, depends on `snapshot.auto-update-stale`. Snapshot every other
+workspace before the rewrite; step 1 above is where you find out whether this applies. [concurrent-agents.md](concurrent-agents.md) has the full list of operations
 that do this, and the divergence resolution procedure.
 
 ## Rewriting with an external Git tool
@@ -70,6 +71,8 @@ After `jj absorb`, review the result with `jj op show -p`. Then inspect the rema
 
 ## Immutable commits
 
-Jujutsu refuses to rewrite a commit that is immutable — typically one already pushed. The command fails with exit 1 and `Error: Commit <id> is immutable`. This includes `jj describe -r`, `jj rebase -r` and `jj edit`. Do not expect the rewrite to land on a child instead; nothing was written.
+Jujutsu refuses to rewrite a commit that is immutable. The command fails with exit 1 and `Error: Commit <id> is immutable`. This includes `jj describe -r`, `jj rebase -r` and `jj edit`. Do not expect the rewrite to land on a child instead; nothing was written.
+
+The default immutable set is `trunk() | tags() | untracked_remote_bookmarks() | untracked_remote_tags()`, and every ancestor of those. `untracked_remote_tags()` joined that default in jj 0.45.0, so a tag you never tracked now makes its ancestors immutable. Read the set this repository uses with `jj config list --include-defaults revset-aliases`. The immutable set also bounds `mutable()`, which is what `jj sign`, `jj absorb` and `jj converge` operate on when you name no revision.
 
 A separate behavior has a separate trigger. When `@` *becomes* immutable during some other command — a bookmark move, a fetch — Jujutsu creates a new commit on top of it and warns `Warning: The working-copy commit became immutable; a new commit has been created on top of it.` Read that message: the change you were editing is not the change you are now on.

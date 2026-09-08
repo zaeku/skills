@@ -51,7 +51,7 @@ For an update that the user authorized:
 5. Run `jj status`.
 6. Run a focused `jj log`.
 7. Run `jj bookmark list`.
-8. In a repository that signs, run `jj sign`. With no arguments it takes `reachable(@, mutable())`, which is the work that has not been published.
+8. In a repository that signs, run `jj sign`. With no arguments it takes its revisions from the `revsets.sign` setting, whose built-in default is `reachable(@, mutable())`, which is the work that has not been published.
 9. Push the explicit bookmark with `jj git push -b <name>`.
 
 Apply these cases:
@@ -62,7 +62,7 @@ Apply these cases:
 - The remote moved ahead: Run `jj git fetch`. Then rebase onto the remote bookmark. Then push again. Do not force push.
 - The remote rejects the push with `protected branch hook declined`: branch protection refused the push, and the message does not name which rule. An unsigned commit is one cause, measured on GitHub. Read the protection rules on that branch, satisfy what they require, then push again. Do not force push.
 
-A `pre-push` hook does not run under Jujutsu. `jj git push` does not execute Git's hooks and `git push` does, measured on jj 0.44.0. A repository that guards its pushes with a hook has no guard when the push comes from Jujutsu.
+A `pre-push` hook does not run under Jujutsu. `jj git push` does not execute Git's hooks and `git push` does, measured on jj 0.44.0 and again on 0.45.1. A repository that guards its pushes with a hook has no guard when the push comes from Jujutsu.
 
 Do not invent a remote name or bookmark name. Read both names from repository state.
 
