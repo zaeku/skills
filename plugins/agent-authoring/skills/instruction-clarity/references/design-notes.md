@@ -44,29 +44,25 @@ prior knowledge" — was rejected as the test. It deletes worked examples and th
 consequence that rule 3 requires, and it invites an argument about whether a
 defense informs. The deletion test asks about behavior instead.
 
-First use on a real `CLAUDE.md` changed the signal twice.
+Two rounds of use revised the scan column three times.
 
-The signal led with `not X but Y`. It fired three times in that file and was
-wrong three times: `rg`, not `grep -r`, and two more of the same shape. Each
-negation named a habit the reader arrives with, which makes the rejected term
-the working part of the instruction. The form cannot separate that from a
-defense, so the signal now names what the clause describes instead of how it is
-punctuated.
+The column led with `not X but Y`. It fired three times in one file and was
+wrong three times: every hit was a negation naming a habit the reader arrives
+with, which makes the rejected term the working part of the instruction. The
+form cannot separate that from a defense of the draft, so each item now names
+the target of the clause instead of its punctuation.
 
-The signal also read "any clause that defends a choice or explains an absence",
-which caught the consequence that rule 3 requires. Two rules in one table
-pointed opposite ways. Rule 9 now carries the exclusion, and an absence counts
-only when the document is what lacks the thing. An absence in the world — no
-`timeout` binary on this machine — is a fact the model acts on.
+The column also read "any clause that defends a choice or explains an absence",
+which caught the consequence that rule 3 requires and pointed two rules in one
+table opposite ways. An absence now counts only when the document is what lacks
+the thing, and the exclusion for rule 3 sits in the why column, where the
+judgment belongs.
 
-A second report on the same pass moved the exclusion into the why column. Every
-item in the scan column now names the target of the clause, so a consequence
-matches none of them, and the column stays mechanical. The same report caught
-the scan column running narrower than the why column: it said "defends how the
-file is written" while the why column said "a defended choice", and the file
-under review defended a tool choice. A bare "the reason" went out with it,
-because the phrase appears in any sentence that talks about reasons, including
-the rule that governs them.
+The last revision widened one item. The column said "defends how the file is
+written" while the why column said "a defended choice", so a defended tool
+choice passed the scan. A bare "the reason" went out at the same time, because
+the phrase appears in any sentence about reasons, including the rule that
+governs them.
 
 ## Not covered: agent-specific failure modes
 
