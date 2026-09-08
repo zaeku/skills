@@ -1,4 +1,4 @@
-# The eight rules in full
+# The nine rules in full
 
 Numbering matches the table in SKILL.md.
 
@@ -135,3 +135,31 @@ always accumulated a second instruction or a hidden condition.
 
 When a sentence goes long, ask what is buried in it. The fix is usually rule 2
 or rule 4, not trimming words.
+
+## 9 — Keep instructions in the file and reasons outside it
+
+This rule is not from STE. Read `design-notes.md` for its origin.
+
+An instruction file states what is true now. The reason for a rule belongs
+wherever the change is discussed: a reply to the user, a commit message, a
+design note.
+
+Three forms of a reason appear most often:
+
+- A clause that negates an alternative: "not X, but Y".
+- A clause that defends the choice: "this is intentional", "for consistency".
+- A clause that explains an absence: "there is no cache here because".
+
+**Instead of:** "Use `rg`. This is not a performance preference — `grep -r` is fast enough — but a consistency one."
+
+**Write:** "Use `rg`. Its output is stable across machines, and `grep -r` output is not."
+
+**Method:** delete the sentence and read the document again. If no agent
+behavior changes, the sentence was a reason. Restore it in the commit message
+instead.
+
+Three things survive this test and stay in the file:
+
+- The consequence that rule 3 requires. A model that knows what a rule prevents applies it to new cases.
+- A worked example. The example is the instruction.
+- A constraint restated at the end of a long document.

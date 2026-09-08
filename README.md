@@ -12,7 +12,7 @@ plugin of its own, so you install the one you want and leave the rest.
 | Plugin | Skill | What it is for | Verified against |
 | --- | --- | --- | --- |
 | [version-control](plugins/version-control) | `use-jujutsu-safely` | Working inside a Jujutsu repository without losing anyone's files — inspection, changes, history edits, conflicts, recovery, bookmarks, Git remotes | jj 0.44.0, two independent audits |
-| [agent-authoring](plugins/agent-authoring) | `instruction-clarity` | Writing and reviewing instructions an agent will read: skills, system prompts, `AGENTS.md`, tool descriptions | ASD-STE100, applied as eight rules |
+| [agent-authoring](plugins/agent-authoring) | `instruction-clarity` | Writing and reviewing instructions an agent will read: skills, system prompts, `AGENTS.md`, tool descriptions | ASD-STE100, applied as eight rules, plus one on keeping reasons out of the file |
 
 Without a plugin loader, copy the skill directory itself into wherever your
 agent scans for skills:

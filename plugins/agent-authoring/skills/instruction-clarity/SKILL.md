@@ -1,6 +1,6 @@
 ---
 name: instruction-clarity
-description: Apply ASD-STE100 Simplified Technical English rules to writing or reviewing instructions that an AI agent will read — SKILL.md and other skill files, system prompts, AGENTS.md, CLAUDE.md, GEMINI.md and other agent instruction files, tool and subagent descriptions, task briefs, and workflow docs. Use this whenever the user is drafting, editing, or auditing text meant to be followed by a model rather than a person, even if they don't mention STE, controlled language, or clarity by name. Use it again as a revision pass after any edit to one of those files, including an edit made inside a task about something else — the topic of the task does not change what the file is. Also use it when the user says an agent "ignored", "misread", "skipped", or "half-followed" an instruction — those are usually ambiguity defects this skill diagnoses.
+description: Apply ASD-STE100 Simplified Technical English rules, and one added rule that keeps the reason for an instruction out of the file, to writing or reviewing instructions that an AI agent will read — SKILL.md and other skill files, system prompts, AGENTS.md, CLAUDE.md, GEMINI.md and other agent instruction files, tool and subagent descriptions, task briefs, and workflow docs. Use this whenever the user is drafting, editing, or auditing text meant to be followed by a model rather than a person, even if they don't mention STE, controlled language, or clarity by name. Use it again as a revision pass after any edit to one of those files, including an edit made inside a task about something else — the topic of the task does not change what the file is. Also use it when the user says an agent "ignored", "misread", "skipped", or "half-followed" an instruction, or did the thing the file argued against — this skill diagnoses each of those from the instruction text.
 ---
 
 # Agent Instruction Clarity
@@ -10,10 +10,10 @@ mechanics cannot misread a maintenance procedure. Its failure model overlaps
 heavily with an LLM's: ambiguous parse trees, unresolved referents, and
 instructions that get partially executed.
 
-Eight of its rules transfer directly. They are listed below in the order that
-finds the most defects per pass.
+Eight of its rules transfer directly. Rule 9 is an addition to the standard.
+The rules are listed below in the order that finds the most defects per pass.
 
-## The eight rules
+## The nine rules
 
 | # | Rule | Why it matters here | Scan for |
 |---|---|---|---|
@@ -25,6 +25,7 @@ finds the most defects per pass.
 | 6 | Noun clusters of three words maximum | Stacked nouns have several valid parses and English gives no signal which is meant | Four or more stacked nouns with no preposition between them |
 | 7 | No telegraphic compression | Stripping articles and prepositions to save tokens removes exactly the cues that fix structure | Missing articles, dropped prepositions, dashes standing in for verbs |
 | 8 | Long sentences are a smell, not a limit | A long sentence has usually accumulated a second instruction or a hidden condition | Sentences past ~20 words in procedures, ~25 in prose |
+| 9 | Instructions in the file, reasons outside it | A defended choice describes the draft rather than the current state, and the rejected alternative stays in context as a description of the wrong behavior | `not X but Y`, "the reason", "this is intentional", any clause that defends a choice or explains an absence |
 
 Rules 1, 2, and 3 account for most real defects. If a pass has to be short, do
 those three.
@@ -100,16 +101,17 @@ instruction text, then start from the rule the symptom points at.
 | Correct on most inputs, wrong on one case | 4 — write out the branches and look for the one that was never specified |
 | Does nothing, or asks who should act | 5 |
 | Interprets a phrase in an unintended sense | 6, then 7 |
+| Does the thing the document argued against | 9 — the rejected alternative is in the file as text |
 
 If the instruction text is clean under every rule, say so and stop. The cause is
 then outside this skill's scope — see the Scope section.
 
 ## Scope
 
-This skill covers clarity defects that STE was designed to catch. Agent
+This skill covers the clarity defects in the table above. Agent
 instructions have other failure modes — instruction precedence, worked examples,
-trigger conditions, positive alternatives to bare prohibitions — that STE has
-nothing to say about. Do not treat a clean pass here as a complete review.
+trigger conditions, positive alternatives to bare prohibitions — that these
+nine rules do not cover. Do not treat a clean pass here as a complete review.
 
-`[design-notes.md](references/design-notes.md)` records which parts of the standard were left out
-and why. Read it before extending or editing this skill.
+`[design-notes.md](references/design-notes.md)` records what was left out of the standard, and
+where the skill goes past it. Read it before extending or editing this skill.

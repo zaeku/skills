@@ -1,7 +1,8 @@
 # Design notes
 
 Read this before extending or editing this skill. It records what was left out
-of ASD-STE100 on purpose, so the exclusions are not reversed by mistake.
+of ASD-STE100 on purpose, so the exclusions are not reversed by mistake, and
+where the skill goes past the standard.
 
 ## Excluded: the approved vocabulary list
 
@@ -20,6 +21,28 @@ paragraph cap, and STE's descriptive-text style rules.
 
 These serve visual scanning by a human reader. They buy nothing when the reader
 is a model.
+
+## Added: rule 9, which is not from the standard
+
+Rule 9 came from a habit that survives a clean pass under rules 1 to 8. A model
+writing an instruction tends to write the reason for the instruction next to it:
+the alternative it rejected, the objection it answered, the choice it defended.
+
+STE cannot catch this, because STE governs the sentence. A defended choice is
+often a perfect sentence — one action, imperative, short, actor named. The defect
+sits a layer up, in whether the sentence belongs in the file at all.
+
+Three effects made it worth a rule rather than a design note:
+
+- The rejected alternative stays in context as text that describes the wrong behavior.
+- The clause records the state of a draft, so it goes stale first and silently.
+- A model that reads instructions written this way writes its next instruction the same way.
+
+Rule 9 has a mechanical test, which is what qualifies it for the table. An
+earlier framing — "a clause that carries no information for a reader without
+prior knowledge" — was rejected as the test. It deletes worked examples and the
+consequence that rule 3 requires, and it invites an argument about whether a
+defense informs. The deletion test asks about behavior instead.
 
 ## Not covered: agent-specific failure modes
 
@@ -40,5 +63,5 @@ does not address them:
   more weight than those in the middle, which is a constraint on document
   structure that has no print-era analogue.
 
-These are a coherent second skill, not additions to this one. Keeping this skill
-scoped to STE-derived clarity is what makes its rules mechanically checkable.
+These are a coherent second skill, not additions to this one. Every rule in the
+table has a mechanical scan signal, and these five have none.

@@ -22,7 +22,7 @@
     },
     {
       "name": "agent-authoring",
-      "description": "Apply eight rules adapted from ASD-STE100 to instructions an agent will read: skills, system prompts, AGENTS.md, tool descriptions. Also diagnoses an instruction an agent skipped or half-followed.",
+      "description": "Apply nine rules to instructions an agent will read: skills, system prompts, AGENTS.md, tool descriptions. Eight come from ASD-STE100, and one keeps the reason for an instruction out of the file. Also diagnoses an instruction an agent skipped or half-followed.",
       "source": "./plugins/agent-authoring",
       "category": "productivity",
       "keywords": [

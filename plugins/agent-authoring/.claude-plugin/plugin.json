@@ -1,7 +1,7 @@
 {
   "name": "agent-authoring",
-  "version": "0.1.0",
-  "description": "Apply eight rules adapted from ASD-STE100 to instructions an agent will read, and diagnose an instruction an agent skipped or half-followed.",
+  "version": "0.2.0",
+  "description": "Apply nine rules to instructions an agent will read — eight adapted from ASD-STE100, plus one that keeps the reason for an instruction out of the file, and diagnose an instruction an agent skipped or half-followed.",
   "author": {
     "name": "zaeku",
     "url": "https://github.com/zaeku"

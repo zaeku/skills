@@ -17,6 +17,10 @@ half-executed. Eight of its rules transfer directly, and this skill applies them
 to skills, system prompts, `AGENTS.md`, `CLAUDE.md`, tool and subagent
 descriptions, and task briefs.
 
+A ninth rule is an addition. It keeps the reason for an instruction out of the
+file that carries the instruction, which is a habit a human reader tolerates and
+a model reader does not.
+
 It works in two directions. Given a document, it reports findings sorted by
 position, each with a concrete rewrite. Given a symptom — an agent skipped a
 step, ignored a constraint it clearly read, treated one thing as two — it starts
