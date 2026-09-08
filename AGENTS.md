@@ -22,6 +22,10 @@ or run `jj help <command>`. The rules that cost something here:
 - **Run `jj util snapshot` when a session in a workspace ends.** It records the
   working copy and does nothing else; `jj status` also snapshots, but as a side
   effect of a command that may reset the working copy in the same breath.
+  Snapshot before anything rewrites what that workspace has checked out. Once
+  its working copy is stale, `jj util snapshot` refuses as well, and the `jj
+  workspace update-stale` that clears the stale state is what removes its
+  files.
 - Do not discard existing changes. The user loses work that no commit holds.
   Existing changes belong to the user unless a task identifies them as agent
   changes.
