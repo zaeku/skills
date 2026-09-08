@@ -20,9 +20,13 @@ be worded the way it is lives in the commit log; `git log v0.2.0..v0.3.0` is the
   not by measurement.
 - **Git hooks other than `pre-push`.** `pre-push` is measured twice: `git push` runs it and
   `jj git push` ignores it. No other hook is tested.
-- **The GitHub protected-branch rejection.** One observation, on 0.44.0. A local bare remote
-  cannot produce `protected branch hook declined`, so re-running it needs a real remote that
-  carries protection rules.
+- **Whether `protected branch hook declined` is specific to the signature rule.** The cause of the
+  0.44.0 rejection is settled: it was an unsigned push. `zaeku/skills` main carries
+  `required_signatures` and `enforce_admins`, no rulesets, and no other rule that can decline a
+  push over its content — read from the API on 2026-09-08 — and four signed commits went through
+  that same rule the same day. What is untested is whether another rule, such as a required check
+  or a required review, declines with the same string. This repository cannot answer that, because
+  no other rule is enabled on it.
 
 Untried rather than open, and lower value: `jj --at-op <old> new` (files survived, no divergence
 appeared, and the behavior is documented nowhere), a genuinely concurrent second `jj` process,
