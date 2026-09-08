@@ -10,8 +10,7 @@ mechanics cannot misread a maintenance procedure. Its failure model overlaps
 heavily with the way a model misreads text: ambiguous parse trees, unresolved
 referents, and instructions that get partially executed.
 
-Eight of its rules transfer directly. The rules are listed below in the order
-that finds the most defects per pass.
+The rules below are listed in the order that finds the most defects per pass.
 
 ## The nine rules
 
