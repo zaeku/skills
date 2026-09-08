@@ -23,17 +23,22 @@ Apply these cases:
 
 ## Four rules that hold whatever you are doing
 
-These have no natural trigger point, because they apply to every action. The rest of this skill assumes them.
+The rest of this skill assumes them.
 
-**1. There is no staging area, and every `jj` command snapshots first.** `@` is the working-copy commit and every file edit is already part of it. A generated file or a build output enters `@` as soon as it exists. A command you think of as read-only — `jj status`, `jj log` — snapshots the working copy before it runs. A snapshot writes a commit, so a repository with commit signing configured signs on every command. A file above the snapshot size limit is the one thing that does not enter `@`: Jujutsu refuses that file alone, exits 0, leaves it untracked, and records every other file normally. Add its pattern to `.gitignore`.
+**1. There is no staging area, and every `jj` command snapshots first.** `@` is the working-copy commit and every file edit is already part of it. A generated file or a build output enters `@` as soon as it exists. A command you think of as read-only — `jj status`, `jj log` — snapshots the working copy before it runs. A snapshot writes a commit, so a repository with commit signing configured signs on every command. A file above the snapshot size limit is the one thing that does not enter `@`. Jujutsu refuses that file alone: it exits 0, leaves the file untracked, and records every other file normally. Add its pattern to `.gitignore`.
 
-**The exception to rule 1: in a workspace that is not yours, the next `jj` command can delete files instead of snapshotting them.** That happens after any other workspace rewrote the operation log — `jj undo`, `jj op restore`, `jj op abandon` — or rewrote the change this workspace has checked out — `jj rebase -r`, `jj abandon`. The command removes at least every file Jujutsu never snapshotted there, and can remove a snapshotted one too. Run `jj util snapshot` in every other workspace **before** you run such a command. After the command the files are already off that disk, and `jj util snapshot` cannot bring them back. See [concurrent-agents.md](references/concurrent-agents.md).
+**The exception to rule 1: in a workspace that is not yours, the next `jj` command can delete files instead of snapshotting them.** That happens after either of these:
+
+- Another workspace rewrote the operation log: `jj undo`, `jj op restore`, `jj op abandon`.
+- Another workspace rewrote the change this workspace has checked out: `jj rebase -r`, `jj abandon`.
+
+The command removes at least every file Jujutsu never snapshotted there, and can remove a snapshotted one too. Run `jj util snapshot` in every other workspace **before** you run such a command. After the command the files are already off that disk, and `jj util snapshot` cannot bring them back. See [concurrent-agents.md](references/concurrent-agents.md).
 
 **2. Name revisions by ID. Never by position.** Each of these names whatever sits there at that instant: `heads(...)`, `@-`, "the tip", and any shell substitution that resolves one of them. A rebase, another workspace or a snapshot changes what they resolve to. The next command then acts on a different commit, and it reports nothing.
 
 This matters most for `jj describe`, which overwrites a description without asking. It also takes its revisions positionally, so one `jj describe -r <revset> -m "<message>"` overwrites the description of every commit the revset resolves to.
 
-**Record finished work with `jj commit -m`, not `jj describe`.** `jj commit` has no `-r` option and always acts on `@`, so it cannot describe a commit you did not mean. It also leaves `@` empty and undescribed, so your next edit starts a new change instead of amending the one you just described. Use `jj describe` for what `jj commit` does not cover: a change that is not `@`, or one you are still working on. [making-changes.md](references/making-changes.md) has the cases.
+**Record finished work with `jj commit -m`, not `jj describe`.** `jj commit` has no `-r` option and always acts on `@`, so it cannot describe a change you did not mean. It also leaves `@` empty and undescribed, so your next edit starts a new change instead of amending the one you just described. Use `jj describe` for what `jj commit` does not cover: a change that is not `@`, or one you are still working on. [making-changes.md](references/making-changes.md) has the cases.
 
 When you do name a revision:
 

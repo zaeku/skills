@@ -58,11 +58,11 @@ cd <workspace> && jj util snapshot
 
 It prints `Snapshot complete.`, or `No snapshot needed.` when the workspace is clean.
 
-If you own a workspace, run `jj util snapshot` in it at the end of your turn.
+Apply these cases:
 
-Do not snapshot another agent's workspace on its behalf during normal work. That snapshot races the agent still writing into the workspace, and it covers only the files that existed at that instant.
-
-**One exception.** Before any operation in the list above, snapshot every other workspace, even the ones you do not own. Tell the other agents first where you can. `recovering.md` gives the same instruction for the same case.
+- Your own workspace, at the end of your turn: Run `jj util snapshot`.
+- Another agent's workspace, during normal work: Do not snapshot it. That snapshot races the agent still writing into the workspace, and it covers only the files that existed at that instant.
+- Another agent's workspace, before any operation in the list above: Run `jj util snapshot` there too, and tell that agent first where you can. `recovering.md` gives the same instruction for the same case.
 
 **`jj edit` of a revision another workspace has checked out.** It succeeds silently, with no warning, and leaves two workspaces on one change ID with different commit IDs. Do not run it against another workspace's `@`.
 
@@ -87,13 +87,15 @@ Rewriting a change that a workspace has checked out produces two commits with th
 Error: Change ID `abcdefgh` is divergent
 ```
 
+Compare the copies with `jj diff -r <id>` first. If they differ in content, abandon nothing and ask the user.
+
 Both copies usually hold identical content, so picking by inspection tells you nothing. **Pick by which one a workspace is sitting on**, because abandoning that one strands the workspace:
 
 ```sh
 cd <workspace> && jj log -r @ --no-graph -T 'commit_id.short()'
 ```
 
-First compare the copies with `jj diff -r <id>`. If they differ in content, abandon nothing and ask the user. If they hold the same content, apply these cases:
+When the copies hold the same content, apply these cases:
 
 - One copy is a workspace's working copy: Keep it. Abandon the others by commit ID.
 - No copy is any workspace's working copy: Keep the one whose diff you want, abandon the rest.

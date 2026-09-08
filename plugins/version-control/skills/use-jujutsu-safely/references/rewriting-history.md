@@ -4,7 +4,9 @@ Read before you run `jj squash`, `jj split`, `jj rebase`, `jj absorb`, or `jj si
 
 ## Before the rewrite
 
-1. Run `jj workspace list`. If a workspace other than yours exists, read [concurrent-agents.md](concurrent-agents.md) before you continue, and run `cd <workspace> && jj util snapshot` in each of those workspaces first. A rewrite of a change another workspace has checked out removes that workspace's unsnapshotted files.
+1. Run `jj workspace list`. A rewrite of a change another workspace has checked out removes that workspace's unsnapshotted files, so when any other workspace exists:
+   - Read [concurrent-agents.md](concurrent-agents.md) before you continue.
+   - Run `cd <workspace> && jj util snapshot` in each of those workspaces.
 2. Run `jj status`.
 3. Run a focused `jj log` that shows every affected commit.
 4. Resolve the source revision **to an ID**, not to a revset that means "the head".
@@ -70,4 +72,4 @@ After `jj absorb`, review the result with `jj op show -p`. Then inspect the rema
 
 Jujutsu refuses to rewrite a commit that is immutable — typically one already pushed. The command fails with exit 1 and `Error: Commit <id> is immutable`. This includes `jj describe -r`, `jj rebase -r` and `jj edit`. Do not expect the rewrite to land on a child instead; nothing was written.
 
-A separate behaviour has a separate trigger. When `@` *becomes* immutable during some other command — a bookmark move, a fetch — Jujutsu creates a new commit on top of it and warns `Warning: The working-copy commit became immutable; a new commit has been created on top of it.` Read that message: the change you were editing is not the change you are now on.
+A separate behavior has a separate trigger. When `@` *becomes* immutable during some other command — a bookmark move, a fetch — Jujutsu creates a new commit on top of it and warns `Warning: The working-copy commit became immutable; a new commit has been created on top of it.` Read that message: the change you were editing is not the change you are now on.

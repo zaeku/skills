@@ -23,7 +23,7 @@ Reproduced in throwaway repositories, and reflected in the skill text:
 - `jj abandon -r @` removes the working copy's files from disk.
 - Large-file refusal is per file: exit 0, file stays untracked, siblings recorded.
 - Rewriting an immutable commit fails with exit 1 and `Error: Commit <id> is immutable`,
-  including `jj edit`. The new-commit-on-top behaviour fires only when `@` *becomes*
+  including `jj edit`. The new-commit-on-top behavior fires only when `@` *becomes*
   immutable during another command.
 - `jj bookmark set` forward-only, `--allow-backwards`, and the exact refusal message.
 - `--allow-new` is gone; `jj git push -b <new>` tracks automatically; `-c <rev>` creates
@@ -67,7 +67,7 @@ Do not reintroduce these:
 - **`jj status --ignore-working-copy` first, then a normal command**: removed the previously
   snapshotted file too. Measured once, not characterised.
 - **`jj --at-op <old> new`**: files survived and no divergence appeared, contradicting the
-  skill's former table row. The row is gone; the behaviour is not documented anywhere.
+  skill's former table row. The row is gone; the behavior is not documented anywhere.
 
 - **An external Git history rewrite in a colocated repository.** `git filter-repo` repacked away
   the working-copy commit, and every `jj` command afterwards failed to open the repository.
@@ -96,5 +96,5 @@ Do not reintroduce these:
   it to `--no-integrate-operation` and internal errors, and no run of either audit suggested it.
 - "Silent" is kept as the description of the loss, alongside the exact `removed <n> files`
   string.
-- Not covered, judged low frequency for this audience: sparse checkouts, `jj fix`, `jj sign`,
+- Not covered, judged low frequency for this audience: sparse checkouts, `jj fix`,
   `jj simplify-parents`, colocated-repo Git index interactions.

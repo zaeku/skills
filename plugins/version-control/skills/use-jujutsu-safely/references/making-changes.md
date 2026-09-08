@@ -28,22 +28,22 @@ If the task must modify an existing commit in place, run `jj edit <revision>` an
 
 **Record finished work with `jj commit -m "<message>"`.** Run step 1 first and confirm that
 `jj diff` reports modifications: `jj commit` on an empty `@` creates an empty commit that
-carries a description, and prints no warning. This is the default. Do not wait for the user
+carries a description, and prints no warning. Do not wait for the user
 to ask for a commit. You decide when a piece of work is finished and named.
 
 `jj commit` describes `@`. Then it creates a new empty child. Three properties follow from
-that, and each one prevents a mistake:
+that:
 
 - **`@` is empty and undescribed afterwards.** The section above lets you edit that state directly, so your next edit lands in a new change.
 - **`jj describe` alone leaves a described `@`.** Your next edit then amends the change you just described.
-- **`jj commit` has no `-r` option.** It always acts on `@`, so it cannot describe a commit you did not mean. Rule 2 of `SKILL.md` describes that mistake. `jj commit` can still be mis-scoped: it takes `[FILESETS]...`, and `jj commit -m "<message>" <path>` commits only that path, exits 0, and leaves every other modification in the new `@`. Pass no path unless the task requires a partial commit.
+- **`jj commit` has no `-r` option.** It always acts on `@`, so it cannot describe a change you did not mean. Rule 2 of `SKILL.md` describes that mistake. `jj commit` can still be mis-scoped. It takes `[FILESETS]...`: `jj commit -m "<message>" <path>` commits only that path, exits 0, and leaves every other modification in the new `@`. Pass no path unless the task requires a partial commit.
 
 **`jj describe` overwrites silently.** It replaces any existing description with no
 confirmation. The output shows the new description, never the one it replaced, so a wrong
 target leaves no trace. It also takes its revisions positionally, so a revset that resolves
 to several commits replaces every one of their descriptions in one command and reports only
 `Updated <n> commits.` Confirm the target with `jj diff -r <id> --name-only` before you run
-it, and never pass a revset that means "the head".
+it. Never pass a revset that means "the head".
 
 Apply these cases:
 
@@ -52,7 +52,7 @@ Apply these cases:
 - A description is wrong, or a named revision needs one: Run `jj describe -r <id> -m "<message>"`.
 - You are editing an existing commit in place after `jj edit`: Run `jj describe -m "<message>"`.
 - The task requires selected changes in separate commits: Use `jj split` after you inspect its help for the installed version.
-- The working-copy commit must be discarded: Run `jj abandon -r <revision>` on that explicit revision. `jj abandon` of a working-copy commit also removes that commit's files from disk and prints only `removed <n> files`. The content stays readable through the abandoned commit ID, so record that ID before you run the command.
+- The working-copy commit must be discarded: Record the commit ID first. `jj abandon` of a working-copy commit also removes that commit's files from disk and prints only `removed <n> files`, and the content stays readable through that ID. Then run `jj abandon -r <revision>` on that explicit revision.
 
 By default a bookmark does not follow `jj commit`, and one setting changes that. See [bookmarks-and-remotes.md](bookmarks-and-remotes.md).
 
