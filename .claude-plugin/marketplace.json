@@ -32,6 +32,19 @@
         "controlled-language"
       ],
       "homepage": "https://github.com/zaeku/skills/tree/main/plugins/agent-authoring"
+    },
+    {
+      "name": "load-agents-dot-md",
+      "description": "A SessionStart hook that prints the project root AGENTS.md into the context. Claude Code injects CLAUDE.md on its own and never AGENTS.md, and the lazy load of a nested instruction file fires on the Read tool, which auto mode does not use.",
+      "source": "./plugins/load-agents-dot-md",
+      "category": "productivity",
+      "keywords": [
+        "agents-md",
+        "hooks",
+        "context",
+        "session-start"
+      ],
+      "homepage": "https://github.com/zaeku/skills/tree/main/plugins/load-agents-dot-md"
     }
   ]
 }

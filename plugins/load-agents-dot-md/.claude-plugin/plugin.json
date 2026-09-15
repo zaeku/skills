@@ -1,0 +1,17 @@
+{
+  "name": "load-agents-dot-md",
+  "version": "0.1.0",
+  "description": "Print the project root AGENTS.md into the context at session start, so an agent that never calls Read still receives it.",
+  "author": {
+    "name": "zaeku",
+    "url": "https://github.com/zaeku"
+  },
+  "repository": "https://github.com/zaeku/skills",
+  "license": "MIT",
+  "keywords": [
+    "agents-md",
+    "hooks",
+    "context",
+    "session-start"
+  ]
+}

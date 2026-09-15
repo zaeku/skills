@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/load-agents-dot-md.sh",
+            "timeout": 5,
+            "statusMessage": "Reading root AGENTS.md"
+          }
+        ]
+      }
+    ]
+  }
+}
