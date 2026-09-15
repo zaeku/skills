@@ -14,7 +14,7 @@ plugin of its own, so you install the one you want and leave the rest.
 | --- | --- | --- | --- |
 | [version-control](plugins/version-control) | `use-jujutsu-safely` | Working inside a Jujutsu repository without losing anyone's files — inspection, changes, history edits, conflicts, recovery, bookmarks, Git remotes | jj 0.45.1, two independent audits plus a re-verification pass |
 | [agent-authoring](plugins/agent-authoring) | `instruction-clarity` | Writing and reviewing instructions an agent will read: skills, system prompts, `AGENTS.md`, tool descriptions | ASD-STE100, applied as eight rules, plus one on keeping reasons out of the file |
-| [load-agents-dot-md](plugins/load-agents-dot-md) | a `SessionStart` hook | Printing the project root `AGENTS.md` into the context, which Claude Code never injects on its own | Claude Code, where a nested instruction file loads on the Read tool and auto mode does not use it |
+| [load-agents-dot-md](plugins/load-agents-dot-md) | a `SessionStart` hook | Printing the project root `AGENTS.md` into the context, which Claude Code never injects on its own — Claude Code only, unlike the skills above | Claude Code, where a nested instruction file loads on the Read tool and auto mode does not use it |
 
 Without a plugin loader, copy the skill directory itself into wherever your
 agent scans for skills:

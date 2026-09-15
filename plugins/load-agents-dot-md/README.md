@@ -17,5 +17,8 @@ It prints a header naming the file, then the file. It prints a one-line notice
 instead when `CLAUDE_PROJECT_DIR` is unset or the root holds no `AGENTS.md`, and
 it exits 0 in every case.
 
+This plugin is for Claude Code only. Other harnesses load `AGENTS.md` on their
+own, and the `hooks/hooks.json` format here is Claude Code's.
+
 It reads the root file only. A nested `AGENTS.md` stays the agent's job to read
 before it edits under that directory.
