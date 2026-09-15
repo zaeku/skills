@@ -106,6 +106,13 @@ then outside this skill's scope — see the Scope section.
 
 ## Scope
 
+The scan signals assume a document written in English. Rules 2, 5, 6, 7 and 8
+key on English function words, English passive morphology, and English word
+counts. In a document written in another language, apply the principles and
+report nothing from the signals. A signal read against a language it does not
+fit reports clean text as defective, and misses the defect it was written to
+catch.
+
 This skill covers the clarity defects in the table above. Agent instructions
 have other failure modes — instruction precedence, worked examples, trigger
 conditions, positive alternatives to bare prohibitions — that these nine rules

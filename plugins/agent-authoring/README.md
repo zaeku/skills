@@ -30,6 +30,9 @@ from the rule that symptom points at.
 `references/design-notes.md` records which parts of the standard were left out,
 and why.
 
+The scan signals assume an English document. Against another language the nine
+principles still hold, and the signals report nothing usable.
+
 The scope is narrow on purpose. Instruction precedence, worked examples, and
 trigger conditions are real failure modes that STE has nothing to say about, so
 a clean pass here is not a complete review.
