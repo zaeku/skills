@@ -1,6 +1,6 @@
 {
   "name": "version-control",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Work inside a Jujutsu repository without losing anyone's files. Verified against jj 0.45.1.",
   "author": {
     "name": "zaeku",
