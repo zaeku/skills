@@ -17,9 +17,13 @@ This file holds what applies before you know which task you are in. Everything e
 
 Apply these cases:
 
-- `.jj` exists and `.git` does not: Use `jj` to inspect and change repository state.
-- `.jj` does not exist: Initialize Jujutsu when the user asks for it. Do not initialize it otherwise.
+- `.jj` exists and `.git` does not: Use `jj` to inspect and change repository state. The backing Git repository is at `.jj/repo/store/git`, and Git commands fail in the working directory.
 - `.jj` and `.git` exist: Treat the repository as colocated. Use `jj` for commits and history edits.
+- `.jj` does not exist: Initialize Jujutsu when the user asks for it. Do not initialize it otherwise. Name the mode before you run the command.
+
+**`jj git init` and `jj git clone` produce a colocated repository.** `git.colocate` defaults to `true` on jj 0.45.1. Pass `--no-colocate` when the user asked for Jujutsu alone, and read `jj config list --include-defaults git.colocate` first when the outcome matters: a machine that sets it to `false` inverts the default, and `--colocate` overrides it.
+
+An existing Git repository can only be adopted colocated. `jj git init` in one imports its history and keeps the `.git` in place.
 
 **Settings change what a command does.** This skill states Jujutsu's built-in defaults. A user config, a repository config or a `--config` flag can replace any of them: which revisions a command takes when you name none, which commits are immutable, whether a bookmark advances. When a default this skill names decides the outcome, read the value this repository uses first:
 

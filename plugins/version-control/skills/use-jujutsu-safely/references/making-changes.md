@@ -68,4 +68,4 @@ A `.gitignore` entry alone does not remove a tracked file from `@`. `jj file unt
 
 ## Large files
 
-Jujutsu refuses to snapshot a file above its size limit and prints the path and the limit. The refusal is per file: the command exits 0, records every other file normally, and leaves the refused file under `Untracked paths:`. It never entered `@`, so do not try to remove it with `jj file untrack` — that command rejects a path that is not ignored. Add the pattern to `.gitignore` rather than raising the limit.
+Jujutsu refuses to snapshot a file above its size limit and prints the path and the limit. The refusal is per file: the command exits 0, records every other file normally, and leaves the refused file under `Untracked paths:`. It never entered `@`, so it needs no removal. Add the pattern to `.gitignore` rather than raising the limit.
