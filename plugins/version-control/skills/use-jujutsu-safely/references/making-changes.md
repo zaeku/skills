@@ -23,7 +23,7 @@ If the task must modify an existing commit in place, run `jj edit <revision>` an
 
 ## After you edit files
 
-1. Run `jj diff` to inspect the resulting modifications.
+1. Run `jj diff --git` to inspect the resulting modifications.
 2. Run `jj status` to detect conflicts and unrelated files.
 
 **Record finished work with `jj commit -m "<message>"`.** Run step 1 first and confirm that

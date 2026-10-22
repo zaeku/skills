@@ -70,6 +70,16 @@ jj bookmark list
 
 Increase the log range only when the task requires it.
 
+**Read a diff with `--git`.** `ui.diff-formatter` defaults to `:color-words`, which marks the changed words inside a line and prints that line once. Colour is the only thing that separates the removed text from the added text, so a diff read as text loses which side each word belongs to. `--git` prints separate `-` and `+` lines. `jj diff`, `jj show`, `jj log`, `jj interdiff` and `jj evolog` all take it.
+
+A repository can set the format once:
+
+```sh
+jj config set --repo ui.diff-formatter ':git'
+```
+
+That writes `~/.config/jj/repos/<hash>/config.toml`, outside the working copy. It is per clone, so pass `--git` rather than assume it.
+
 **The project check.** Several references end a procedure with "Run the project check". That means the test or build command this repository uses — the one named in its contributor documentation, its agent instructions, or by the user. Skip the step when the repository names no such command.
 
 ## What to read, and when
