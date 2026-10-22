@@ -46,6 +46,21 @@ or run `jj help <command>`. The rules that cost something here:
   Unsigning after the push is safe, since `@` is neither pushed nor a parent of
   anything.
 
+## Release a plugin
+
+Raise `version` in `plugins/<name>/.claude-plugin/plugin.json` before you push a
+change to that plugin. A marketplace client compares that number. It offers no
+update while that number is unchanged.
+
+Use the patch number for a correction that adds no coverage. Use the minor
+number for a rule or a section that is new.
+
+Put the version change in its own commit.
+
+A plugin description can name a verified tool version, as in `Verified against
+jj 0.45.1`. That names the version the whole plugin was run on. Raise it after
+you re-run the whole plugin on a new version.
+
 ## Language
 
 Write documentation, project artifacts, code comments, and change descriptions
