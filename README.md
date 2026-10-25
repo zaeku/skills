@@ -11,7 +11,7 @@ plugin of its own, so you install the one you want and leave the rest.
 
 | Plugin | Ships | What it is for | Verified against |
 | --- | --- | --- | --- |
-| [version-control](plugins/version-control) | `use-jujutsu-safely` | Working inside a Jujutsu repository without losing anyone's files — inspection, changes, history edits, conflicts, recovery, bookmarks, Git remotes | jj 0.45.1, two independent audits plus a re-verification pass |
+| [version-control](plugins/version-control) | `use-jujutsu-safely` | Working inside a Jujutsu repository without losing anyone's files — inspection, changes, history edits, conflicts, recovery, bookmarks, Git remotes | jj 0.46.0, two independent audits plus two re-verification passes |
 | [agent-authoring](plugins/agent-authoring) | `instruction-clarity` | Writing and reviewing instructions an agent will read: skills, system prompts, `AGENTS.md`, tool descriptions | ASD-STE100, applied as eight rules, plus one on keeping reasons out of the file |
 
 Without a plugin loader, copy the skill directory itself into wherever your
