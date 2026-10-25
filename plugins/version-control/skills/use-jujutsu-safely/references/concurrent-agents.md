@@ -16,9 +16,13 @@ Apply these cases:
 - One agent will edit the repository: Use the current workspace.
 - A workspace reports that its working copy is stale: Follow the stale-workspace procedure at the end of the next section. Do not run `jj workspace update-stale` before that procedure.
 
+Tear a workspace down with `jj workspace remove <name>`, from jj 0.46.0. It snapshots the working copy into a commit, then deletes the directory — measured with a file no `jj` command had seen, which reached the commit. Note the commit ID it prints: nothing else points at that commit. `jj workspace forget` is the other half only: it leaves every file on disk, and in a colocated repository it removes the Git worktree.
+
 Each workspace has its own working-copy commit. Rewriting a change that another workspace has checked out usually leaves that workspace **divergent**: see "Divergent changes are normal here" below.
 
-Do not substitute a Git worktree for a Jujutsu workspace. Jujutsu does not manage one as a workspace, and `jj workspace list` does not show it. Worse, a `jj` command run from inside a Git worktree of a colocated repository acts on the main workspace: `jj root` prints the main repository root and `jj status` reports the main workspace's `@`, so an agent working in the worktree edits one tree and commits another. Measured on jj 0.45.1.
+Do not create a workspace with `git worktree add`. In a colocated repository `jj workspace add` makes the Git worktree itself, and prints `Created Git worktree for the new workspace.`, so a directory holding a `.git` proves nothing. The directory a Jujutsu workspace lives in holds a `.jj`; a hand-made Git worktree does not, and that is how to tell them apart.
+
+A `jj` command inside a hand-made Git worktree does not fail usefully. Inside the repository's working copy, it acts on the main workspace: `jj root` prints the main repository root, `jj status` reports the main workspace's `@`, and a file written there reaches neither — an agent edits one tree and commits another. Beside the repository, `jj` answers `Error: There is no jj repo in "."`. Measured on jj 0.46.0.
 
 ## Snapshot every other workspace before you rewrite anything
 
@@ -30,7 +34,7 @@ Do not substitute a Git worktree for a Jujutsu workspace. Jujutsu does not manag
 Added 0 files, modified 0 files, removed 3 files
 ```
 
-**One setting decides whether anyone sees it happen.** `snapshot.auto-update-stale` is `false` by default. Measured on jj 0.45.1, with `jj rebase -r` and `jj abandon -r` against another workspace's `@`:
+**One setting decides whether anyone sees it happen.** `snapshot.auto-update-stale` is `false` by default. Measured on jj 0.45.1 with `jj rebase -r` and `jj abandon -r` against another workspace's `@`, and re-measured on jj 0.46.0 with `jj rebase -r`:
 
 - `false`: the next `jj` command in that workspace fails with `Error: The working copy is stale (not updated since operation <id>)`, exit 1. Every later command there fails the same way. The files are still on disk. They go when someone runs the `jj workspace update-stale` that the error hints at.
 - `true`: the next `jj` command runs `jj workspace update-stale` for you. It exits 0, prints the `removed <n> files` line among its ordinary output, and the files are already gone.
@@ -41,16 +45,18 @@ Read the value before you rely on either behavior:
 jj config list --include-defaults snapshot.auto-update-stale
 ```
 
-**Other rewrites, measured on jj 0.45.1 under both values of the setting.** These rows differ in whether the other workspace went stale at all:
+**Other rewrites, measured under both values of the setting, on jj 0.45.1 unless the row says otherwise.** These rows differ in whether the other workspace went stale at all:
 
 - `jj op abandon ..<op>`: that workspace fails with `Internal error: The repo was loaded at operation <a>, which seems to be a sibling of the working copy's operation <b>` and exit 255. Its files stay. Run the `jj op integrate <b>` that Jujutsu hints, in that workspace: it exits 0, prints `The specified operation has been integrated with other existing operations.`, and the workspace works again with its files intact.
 - `jj op restore <op>`, to an operation that predates the workspace: that workspace prints `No working copy.` and keeps its files. `jj workspace update-stale` there fails with `Error: Nothing checked out in this workspace`.
-- `jj op restore <op>` to a later operation, and `jj undo`: the files stayed on disk in every run, snapshotted and unsnapshotted alike.
+- `jj op restore <op>` to a later operation: the files stayed on disk in every run, snapshotted and unsnapshotted alike.
+- `jj undo` of an operation performed in **your own** workspace: the same, files stay.
+- `jj undo --allow-cross-workspace`, of an operation performed in **that** workspace: it goes stale, and the `jj workspace update-stale` that clears it removes its unsnapshotted files. Without the flag, `jj undo` and `jj redo` refuse from jj 0.46.0: `Error: Refusing to undo operation <id> because it was performed in workspace <name>`, exit 1. Treat that refusal as a stop, not as a flag to add. Jujutsu's own hint offers `jj op revert <op>`, which reverts that one operation; this skill has not measured it.
 - `jj describe -r <that workspace's @>`: snapshots normally and leaves the files.
 
 Snapshot the other workspaces before any of these anyway. The list describes one version's behavior, and it is not a promise about the next one.
 
-**The content survives; the disk state does not.** Jujutsu inserts a snapshot operation before it resets, so the removed content is still readable afterwards by commit ID, sometimes only through the operation log:
+**The content usually survives; the disk state does not.** Jujutsu inserts a snapshot operation before it resets, so the removed content is normally still readable afterwards by commit ID, sometimes only through the operation log. Normally, not always: after a cross-workspace `jj undo` on jj 0.46.0, one removed file was in no commit the operation log held. Read the content back before you let the disk state go:
 
 ```sh
 jj op log

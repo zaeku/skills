@@ -21,7 +21,7 @@ Apply these cases:
 - `.jj` and `.git` exist: Treat the repository as colocated. Use `jj` for commits and history edits.
 - `.jj` does not exist: Initialize Jujutsu when the user asks for it. Do not initialize it otherwise. Name the mode before you run the command.
 
-**`jj git init` and `jj git clone` produce a colocated repository.** `git.colocate` defaults to `true` on jj 0.45.1. Pass `--no-colocate` when the user asked for Jujutsu alone, and read `jj config list --include-defaults git.colocate` first when the outcome matters: a machine that sets it to `false` inverts the default, and `--colocate` overrides it.
+**`jj git init` and `jj git clone` produce a colocated repository.** `git.colocate` defaults to `true` on jj 0.46.0, for `jj git init`, `jj git clone` and `jj workspace add` alike. Pass `--no-colocate` when the user asked for Jujutsu alone, and read `jj config list --include-defaults git.colocate` first when the outcome matters: a machine that sets it to `false` inverts the default, and `--colocate` overrides it.
 
 An existing Git repository can only be adopted colocated. `jj git init` in one imports its history and keeps the `.git` in place.
 

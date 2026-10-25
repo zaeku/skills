@@ -40,6 +40,12 @@ Confirm the result with `jj bookmark list`. Four limits apply:
 
 Do not push unless the user authorized a change to the remote. A push changes shared state.
 
+One push can reach more than one remote. `jj git push` takes its remotes from `git.push`, and a list there pushes the bookmark to every remote in it, in one command, with one line of output per remote — measured on jj 0.46.0. With `git.push` unset it pushes to `origin`. Read the setting before you push:
+
+```sh
+jj config list --include-defaults git.push
+```
+
 Fetch only when the task requires current remote state.
 
 For an update that the user authorized:
